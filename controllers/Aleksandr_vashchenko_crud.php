@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Aleksandr_vashchenko_crud extends Controller_Base
 {
-
     public $__load_default = true;
 
     /**
@@ -17,8 +16,7 @@ class Aleksandr_vashchenko_crud extends Controller_Base
         $this->data['seo_title'] = $_SERVER['REQUEST_URI'];
         $this->data['seo_description'] = $_SERVER['REQUEST_URI'];
         $this->data['seo_keywords'] = $_SERVER['REQUEST_URI'];
-        // Check Access ???
-
+        
         // Load model
         $this->load->model('Aleksandr_vashchenko_crud_model');
     }
@@ -96,12 +94,19 @@ class Aleksandr_vashchenko_crud extends Controller_Base
      */
     public function edit($id)
     {
-        if (!$this->uri->segment(3)) {
+        // Validation
+        if (!intval($this->uri->segment(3))) {
             redirect('/aleksandr_vashchenko_crud');
         }
 
         // Getting user's info
-        $result = $this->Aleksandr_vashchenko_crud_model->user_info($id);
+        $result = $this->Aleksandr_vashchenko_crud_model->user_info(intval($id));
+
+        // Validation
+        if (!$result) {
+            redirect('/aleksandr_vashchenko_crud');
+        }
+
         $this->data['row'] = $result[0];
 
         // Getting groups info

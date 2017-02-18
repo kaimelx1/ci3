@@ -36,7 +36,7 @@ class Aleksandr_vashchenko_crud_model extends CI_Model
     /**
      * Makes query to DB for user's info
      * @param int $id
-     * @return array
+     * @return mixed
      */
     public function user_info($id)
     {
@@ -49,14 +49,20 @@ class Aleksandr_vashchenko_crud_model extends CI_Model
                 LIMIT 1
                ";
 
-        return $this->db->query($sql)->result_array();
+        if ($this->db->query($sql)->result_array()) {
+            return $this->db->query($sql)->result_array();
+
+        } else {
+
+            return false;
+        }
     }
 
     /**
      * Makes query to DB for user info
      * @param string $email
      * @param string $password
-     * @return object
+     * @return mixed
      */
     public function verify_user($email, $password)
     {
