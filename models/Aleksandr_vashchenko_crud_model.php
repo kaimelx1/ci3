@@ -3,11 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Aleksandr_vashchenko_crud_model extends CI_Model
 {
-
-    public function __construct()
-    {
-    }
-
     /**
      * Makes query to DB for table info
      * @param string $where
