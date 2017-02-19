@@ -38,7 +38,7 @@
         $('.page_right').on('click', function () {
             var page = $('.table_page').val();
             var per_page = $('#alek-page-select').val();
-            if (page <= parseInt(<?=$count?>/ per_page))
+            if (page < (<?=$count?>/ per_page))
             {
                 page++;
                 $('.table_page').val(page);
@@ -50,10 +50,7 @@
         $('.del_btn').on('click', function () {
 
             // confirm window validation
-            var count = 0;
-            $('input:checkbox:checked').each(function () {
-                count = $(this).val();
-            });
+            var count = $('#table_form').find('input[type=checkbox]:checked').length;
 
             if (count) {
                 // confirmation
@@ -63,7 +60,7 @@
                         url: "/ci3/aleksandr_vashchenko_crud/del_request/",
                         success: function (data) {
                             // delete
-                            $('.del_checkbox:checked').parent().parent().remove();
+                            //$('.del_checkbox:checked').parent().parent().remove();
                             table_refresh();
                         }
                     };
